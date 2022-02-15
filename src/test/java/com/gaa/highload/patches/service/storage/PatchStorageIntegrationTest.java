@@ -1,11 +1,9 @@
-package com.gaa.highload.storage;
+package com.gaa.highload.patches.service.storage;
 
 import com.gaa.highload.patches.service.date.DateAPI;
 import com.gaa.highload.patches.service.date.DateService;
 import com.gaa.highload.patches.service.files.FilesAPI;
 import com.gaa.highload.patches.service.files.FilesAPIService;
-import com.gaa.highload.patches.service.storage.PatchStorageAPI;
-import com.gaa.highload.patches.service.storage.PatchStorageService;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
