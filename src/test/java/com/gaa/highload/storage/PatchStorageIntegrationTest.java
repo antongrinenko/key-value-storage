@@ -12,19 +12,20 @@ import org.mockito.Mockito;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class PatchStorageIntegrationTest {
-//    @Test
-//    public void integrationTest() {
-//        DateAPI dateService = Mockito.mock(DateService.class);
-//        FilesAPI filesService = new FilesAPIService();
-//        PatchStorageAPI patchStorage = new PatchStorageService(dateService, filesService);
-//
-//        Mockito.when(dateService.getCurrentDateLabel()).thenReturn("2022-2");
-//        patchStorage.addPatches("email1", Arrays.asList("p1_1", "p1_2"));
-//        patchStorage.addPatches("email1", Arrays.asList("p1_3"));
-//        patchStorage.addPatches("email2", Arrays.asList("p2_1"));
-//
-//        assertThat(patchStorage.readLastPatches("email1", 2L), is(Arrays.asList("p3", "p2")));
-//    }
+    @Test
+    public void integrationTest() {
+        DateAPI dateService = Mockito.mock(DateService.class);
+        FilesAPI filesService = new FilesAPIService();
+        PatchStorageAPI patchStorage = new PatchStorageService(dateService, filesService);
+
+        Mockito.when(dateService.getCurrentDateLabel()).thenReturn("2022-2");
+        patchStorage.addPatches("email1", Arrays.asList("p1_1", "p1_2"));
+        patchStorage.addPatches("email1", Arrays.asList("p1_3"));
+        patchStorage.addPatches("email2", Arrays.asList("p2_1"));
+
+        assertThat(patchStorage.readLastPatches("email1", 2L), is(Arrays.asList("p1_3", "p1_2")));
+    }
 }

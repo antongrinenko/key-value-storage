@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.OpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,20 +22,30 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.nio.file.StandardOpenOption.APPEND;
+
 @CommonsLog
 @Service
 public class FilesAPIService implements FilesAPI {
     private static final String STORAGE_DIR = "./patch_storage";
     private static final Charset STORAGE_CHARSET = StandardCharsets.UTF_8;
 
-    private Map<String, Path> filesMap = new ConcurrentHashMap<>();
+    private Map<String, File> filesMap = new ConcurrentHashMap<>();
 
 
     @Override
     public void addRowsToFile(String folderName, String fileName, List<String> rows) throws IOException {
         String fullFileName = getFullFileName(folderName, fileName);
-        Path file = filesMap.computeIfAbsent(fullFileName, s -> Paths.get(STORAGE_DIR + "/" + fullFileName + ".txt"));
-        Files.write(file, rows, STORAGE_CHARSET);
+
+        File file;
+        if (!filesMap.containsKey(fullFileName)) {
+            file = new File(STORAGE_DIR + "/" + fullFileName + ".txt");
+            FileUtils.touch(file);
+            filesMap.put(fullFileName, file);
+        } else {
+            file = filesMap.get(fullFileName);
+        }
+        Files.write(file.toPath(), rows, STORAGE_CHARSET, APPEND);
     }
 
     @Override
@@ -50,7 +59,11 @@ public class FilesAPIService implements FilesAPI {
         List<String> result = new ArrayList<>();
         int counter = 0;
         while(counter < limit) {
-            result.add(reader.readLine());
+            String line = reader.readLine();
+            if (Objects.isNull(line)) {
+                break;
+            }
+            result.add(line);
             counter++;
         }
         return result;
@@ -59,9 +72,9 @@ public class FilesAPIService implements FilesAPI {
     @Override
     public void deleteFile(String folderName, String fileName) {
         String fullFileName = getFullFileName(folderName, fileName);
-        Path file = filesMap.remove(fullFileName);
+        File file = filesMap.remove(fullFileName);
         if (Objects.nonNull(file)) {
-            file.toFile().delete();
+            file.delete();
         }
     }
 
