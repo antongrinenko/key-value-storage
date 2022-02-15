@@ -27,7 +27,7 @@ import static java.nio.file.StandardOpenOption.APPEND;
 @CommonsLog
 @Service
 public class FilesAPIService implements FilesAPI {
-    private static final String STORAGE_DIR = "./patch_storage";
+    public static final String STORAGE_DIR = "./patch_storage";
     private static final Charset STORAGE_CHARSET = StandardCharsets.UTF_8;
 
     private Map<String, File> filesMap = new ConcurrentHashMap<>();
