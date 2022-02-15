@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gaa.highload</groupId>
-	<artifactId>lsm-tree-storage</artifactId>
+	<artifactId>patches-storage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lsm-tree-storage</name>
+	<name>patches-storage</name>
 	<properties>
 		<java.version>16</java.version>
 		<maven.compiler.source>16</maven.compiler.source>

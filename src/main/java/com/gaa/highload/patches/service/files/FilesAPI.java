@@ -1,4 +1,4 @@
-package com.gaa.highload.lsm.service.files;
+package com.gaa.highload.patches.service.files;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,8 +1,9 @@
-package com.gaa.highload.lsm.service.files;
+package com.gaa.highload.patches.service.files;
 
 import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.ReversedLinesFileReader;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @CommonsLog
+@Service
 public class FilesAPIService implements FilesAPI {
     private static final String STORAGE_DIR = "./patch_storage";
     private static final Charset STORAGE_CHARSET = StandardCharsets.UTF_8;

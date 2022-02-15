@@ -1,4 +1,4 @@
-package com.gaa.highload.lsm.service.date;
+package com.gaa.highload.patches.service.date;
 
 import java.util.List;
 

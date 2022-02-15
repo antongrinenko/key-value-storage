@@ -1,4 +1,4 @@
-package com.gaa.highload.lsm.service.storage;
+package com.gaa.highload.patches.service.storage;
 
 import java.util.List;
 

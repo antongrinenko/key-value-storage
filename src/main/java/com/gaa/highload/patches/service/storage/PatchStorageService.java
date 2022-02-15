@@ -1,7 +1,7 @@
-package com.gaa.highload.lsm.service.storage;
+package com.gaa.highload.patches.service.storage;
 
-import com.gaa.highload.lsm.service.date.DateAPI;
-import com.gaa.highload.lsm.service.files.FilesAPI;
+import com.gaa.highload.patches.service.date.DateAPI;
+import com.gaa.highload.patches.service.files.FilesAPI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 @CommonsLog
+@RequiredArgsConstructor
 public class PatchStorageService implements PatchStorageAPI {
-    private DateAPI dateService;
-    private FilesAPI filesService;
+    private final DateAPI dateService;
+    private final FilesAPI filesService;
 
     @Override
     public boolean addPatches(String emailId, List<String> patches) {
