@@ -48,5 +48,7 @@ public class PatchStorageIntegrationTest {
         Mockito.when(dateService.getValidDateLabels()).thenReturn(Arrays.asList("2022-3"));
         patchStorage.clearOldPatches();
         assertThat(patchStorage.readLastPatches("email1", null), is(Arrays.asList("p1_4")));
+
+        FileUtils.deleteDirectory(new File(STORAGE_DIR));
     }
 }
